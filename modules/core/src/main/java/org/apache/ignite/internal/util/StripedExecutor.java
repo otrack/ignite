@@ -568,6 +568,10 @@ public class StripedExecutor implements ExecutorService {
             IgniteSystemProperties.getInteger(
                 IgniteSystemProperties.IGNITE_DATA_STREAMING_EXECUTOR_SERVICE_TASKS_STEALING_THRESHOLD, 4);
 
+        static {
+            System.err.println(IGNITE_TASKS_STEALING_THRESHOLD);
+        }
+
         /** Queue. */
         private final Queue<Runnable> queue;
 

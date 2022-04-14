@@ -33,6 +33,7 @@ import org.apache.ignite.internal.util.typedef.internal.LT;
 import org.apache.ignite.internal.util.typedef.internal.S;
 import org.jetbrains.annotations.Nullable;
 import org.apache.ignite.util.deque.FastSizeDeque;
+import org.jsr166.ConcurrentLinkedDeque8;
 
 /**
  * Session implementation bound to selector API and socket API.
@@ -41,7 +42,7 @@ import org.apache.ignite.util.deque.FastSizeDeque;
  */
 class GridSelectorNioSessionImpl extends GridNioSessionImpl implements GridNioKeyAttachment {
     /** Pending write requests. */
-    private final FastSizeDeque<SessionWriteRequest> queue = new FastSizeDeque<>(new ConcurrentLinkedDeque<>());
+    private final ConcurrentLinkedDeque8<SessionWriteRequest> queue = new ConcurrentLinkedDeque8<>();
 
     /** Selection key associated with this session. */
     @GridToStringExclude

@@ -17,6 +17,14 @@
 
 package org.apache.ignite.internal.util.nio;
 
+import org.apache.ignite.IgniteCheckedException;
+import org.apache.ignite.IgniteLogger;
+import org.apache.ignite.internal.util.tostring.GridToStringExclude;
+import org.apache.ignite.internal.util.typedef.internal.LT;
+import org.apache.ignite.internal.util.typedef.internal.S;
+import org.jetbrains.annotations.Nullable;
+import org.jsr166.ConcurrentLinkedDeque8;
+
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -26,14 +34,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.apache.ignite.IgniteCheckedException;
-import org.apache.ignite.IgniteLogger;
-import org.apache.ignite.internal.util.tostring.GridToStringExclude;
-import org.apache.ignite.internal.util.typedef.internal.LT;
-import org.apache.ignite.internal.util.typedef.internal.S;
-import org.jetbrains.annotations.Nullable;
-import org.apache.ignite.util.deque.FastSizeDeque;
-import org.jsr166.ConcurrentLinkedDeque8;
 
 /**
  * Session implementation bound to selector API and socket API.
@@ -42,7 +42,7 @@ import org.jsr166.ConcurrentLinkedDeque8;
  */
 class GridSelectorNioSessionImpl extends GridNioSessionImpl implements GridNioKeyAttachment {
     /** Pending write requests. */
-    private final ConcurrentLinkedDeque8<SessionWriteRequest> queue = new ConcurrentLinkedDeque8<>();
+    private final ConcurrentLinkedDeque<SessionWriteRequest> queue = new ConcurrentLinkedDeque<>();
 
     /** Selection key associated with this session. */
     @GridToStringExclude
@@ -279,7 +279,7 @@ class GridSelectorNioSessionImpl extends GridNioSessionImpl implements GridNioKe
 
         assert res : "Future was not added to queue";
 
-        return queue.sizex();
+        return queue.size();
     }
 
     /**
@@ -304,7 +304,7 @@ class GridSelectorNioSessionImpl extends GridNioSessionImpl implements GridNioKe
 
         assert res : "Future was not added to queue";
 
-        return queue.sizex();
+        return queue.size();
     }
 
     /**
@@ -364,7 +364,7 @@ class GridSelectorNioSessionImpl extends GridNioSessionImpl implements GridNioKe
      * @return Number of write requests.
      */
     int writeQueueSize() {
-        return queue.sizex();
+        return queue.size();
     }
 
     /**

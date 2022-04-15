@@ -68,7 +68,7 @@ public class ClientListenerProcessor extends GridProcessorAdapter {
     public static final String CLIENT_LISTENER_PORT = "clientListenerPort";
 
     /** Default number of selectors. */
-    private static final int DFLT_SELECTOR_CNT = Math.min(4, Runtime.getRuntime().availableProcessors());
+    private static final int DFLT_SELECTOR_CNT = Runtime.getRuntime().availableProcessors(); // Math.min(4, Runtime.getRuntime().availableProcessors());
 
     /** Default TCP direct buffer flag. */
     private static final boolean DFLT_TCP_DIRECT_BUF = false;

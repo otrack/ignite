@@ -103,7 +103,7 @@ public class GridCircularBufferPerformanceTest extends GridCommonAbstractTest {
                     while (!finished.get()) {
                         buf.add(1);
 
-                        if (buf.sizex() > size)
+                        if (buf.size() > size)
                             buf.poll();
 
                         cnt.increment();

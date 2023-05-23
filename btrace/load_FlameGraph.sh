@@ -14,13 +14,14 @@ recordcount=100000
 output_file_load="outputload.txt"
 output_file_run="outputrun.txt"
 
+nb_client="48"
 cd $YCSB_HOME
 
-$YCSB_HOME/bin/ycsb load ignite -p hosts=$hosts -s -P $YCSB_HOME/workloads/$workload -threads $nb_client -p operationcount=$operationcount -p recordcount=$recordcount > $IGNITE_HOME/$output_file_load
-$YCSB_HOME/bin/ycsb run ignite -p hosts=$hosts -s -P $YCSB_HOME/workloads/$workload -threads $nb_client -p operationcount=$operationcount -p recordcount=$recordcount > $IGNITE_HOME/$output_file_run &
+python2 $YCSB_HOME/bin/ycsb load ignite -p hosts=$hosts -s -P $YCSB_HOME/workloads/$workload -threads $nb_client -p operationcount=$operationcount -p recordcount=$recordcount > $IGNITE_HOME/$output_file_load
+python2 $YCSB_HOME/bin/ycsb run ignite -p hosts=$hosts -s -P $YCSB_HOME/workloads/$workload -threads $nb_client -p operationcount=$operationcount -p recordcount=$recordcount > $IGNITE_HOME/$output_file_run &
 
 cd $ASYNC_PROFILER_HOME
 
-./build/bin/asprof -f $YCSB_HOME/flameGraph_YCSB.html $!
+#./build/bin/asprof -f $YCSB_HOME/flameGraph_YCSB.html $!
 
 cd $IGNITE_HOME/btrace

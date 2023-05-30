@@ -8,7 +8,6 @@ nb_client = sys.argv[4]
 list_args = sys.argv[5:len(sys.argv)]
 
 
-
 if flag_avg == "True":
 
     list_nb_client = nb_client.split(" ")
@@ -43,7 +42,7 @@ if flag_avg == "True":
 
             os.remove(file_name)
 else:
-
+    
     file_read = open(YCSB_file_name, "r")
 
     for line in file_read.readlines():
@@ -60,7 +59,7 @@ else:
                 
                 file_write = open(file_name,"a")
                 
-                # print(nb_client+" "+split_line[len(split_line) - 1])
+                #print(nb_client+" "+split_line[len(split_line) - 1])
                 file_write.write(nb_client+" "+split_line[len(split_line) - 1])
 
                 file_write.close()
